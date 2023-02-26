@@ -19,7 +19,19 @@ Create an interface for a portfolio web application. The main (index) page lists
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    projects = Project.query.all()
+    return render_template('index.html', projects=projects)
+
+
+"""
+Create an About page
+Create an about page route and fill out the HTML template.
+"""
+
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 
 """
@@ -37,7 +49,7 @@ NOTE: This page should contain a link/button that takes the user to the Edit rou
 """
 
 
-@app.route('/projects/<id>')
+@app.route('/project/<id>')
 def project(id):
     project = Project.query.get_or_404(id)
     return render_template('detail.html', project=project)
@@ -56,7 +68,7 @@ The page should present a new blank project form that allows the user to Create 
 """
 
 
-@app.route('/projects/new')
+@app.route('/project/new')
 def add_project():
     return render_template('projectform.html')
 
@@ -78,7 +90,7 @@ NOTE: Updating a project should not result in a new project being created, this 
 """
 
 
-@app.route('/projects/<id>/edit')
+@app.route('/project/<id>/edit')
 def edit_project(id):
     project = Project.query.get_or_404(id)
     return render_template('projectform.html', project=project)
@@ -90,7 +102,7 @@ Create a delete route to delete the project from the database. When the delete b
 """
 
 
-@app.route('/projects/<id>/delete')
+@app.route('/project/<id>/delete')
 def delete_project(id):
     project = Project.query.get_or_404(id)
     db.session.delete(project)
