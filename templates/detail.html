@@ -27,13 +27,13 @@
     <section class="header">
       <h1>{{ project.title }}</h1>
       <p>Jan 2021</p>
-      <a href="{{ project.repo_link }}" class="github-btn">
+      <a href="{{ project.repo_link }}" class="github-btn" target="_blank">
         <i class="fab fa-github"></i>
         View on GitHub
       </a>
       <ul class="project-skills">
         <div>
-          {% for skill in project.skills %}
+          {% for skill in project.skills.split(',') %}
           <li>{{ skill }}</li>
           {% endfor %}
         </div>

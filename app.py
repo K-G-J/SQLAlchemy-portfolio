@@ -59,8 +59,9 @@ def project(id):
 @app.route('/project/new', methods=['GET', 'POST'])
 def add_project():
     if request.form:
+        formatted_date = clean_date(request.form['date'])
         new_project = Project(
-            request.form['title'], request.form['date'], request.form['skills'], request.form['github'], request.form['description'])
+            title=request.form['title'], date=formatted_date, skills=request.form['skills'], repo_link=request.form['github'], description=request.form['desc'])
         db.session.add(new_project)
         db.session.commit()
         return redirect(url_for('index'))
