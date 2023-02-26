@@ -56,21 +56,14 @@ def project(id):
     return render_template('detail.html', project=project)
 
 
-"""
-Create the Add route/view
-Create an add view with the route /project/new that allows the user to add a project with the following fields:
-
-Title - string
-Date - date
-Description - text
-Skills - text
-GitHub repo link - text
-The page should present a new blank project form that allows the user to Create a new project that will be stored in the database.
-"""
-
-
 @app.route('/project/new', methods=['GET', 'POST'])
 def add_project():
+    if request.form:
+        new_project = Project(
+            request.form['title'], request.form['date'], request.form['skills'], request.form['github'], request.form['description'])
+        db.session.add(new_project)
+        db.session.commit()
+        return redirect(url_for('index'))
     return render_template('projectform.html')
 
 

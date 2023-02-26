@@ -13,8 +13,8 @@ class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column('Title', db.String())
     date = db.Column('Date', db.DateTime, default=datetime.datetime.now)
-    skills = db.Column('Skills', db.String())
-    repo_link = db.Column('Repo Link', db.String())
+    skills = db.Column('Skills', db.Text)
+    repo_link = db.Column('Repo Link', db.Text)
     description = db.Column('Description', db.Text)
 
     def __repr__(self):
