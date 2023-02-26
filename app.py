@@ -3,26 +3,6 @@ from flask import (render_template, url_for, request, redirect)
 
 
 """
-Routes for the Application
-Create each of the following routes for your application
-
-/ - Known as the root page, homepage, or landing page.
-
-/projects/new - The Create route
-
-/projects/<id> - The Detail route
-
-/projects/<id>/edit - The Edit or Update route
-
-/projects/<id>/delete - Delete route
-
-NOTE: Each route is of course prefixed with the running server address
-
-Example: The route /project would be mapped to: http://<address>:<port>/project
-"""
-
-
-"""
 Create the Homepage route/view
 Route: /
 
@@ -35,6 +15,11 @@ GitHub link - A link to the project on GitHub
 
 Create an interface for a portfolio web application. The main (index) page lists your projects including the project title and short description. Each project links to a detail page that displays the title, date, and description.
 """
+
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 
 """
@@ -52,6 +37,12 @@ NOTE: This page should contain a link/button that takes the user to the Edit rou
 """
 
 
+@app.route('/projects/<id>')
+def project(id):
+    project = Project.query.get_or_404(id)
+    return render_template('detail.html', project=project)
+
+
 """
 Create the Add route/view
 Create an add view with the route /project/new that allows the user to add a project with the following fields:
@@ -63,6 +54,11 @@ Skills - text
 GitHub repo link - text
 The page should present a new blank project form that allows the user to Create a new project that will be stored in the database.
 """
+
+
+@app.route('/projects/new')
+def add_project():
+    return render_template('projectform.html')
 
 
 """
@@ -82,10 +78,29 @@ NOTE: Updating a project should not result in a new project being created, this 
 """
 
 
+@app.route('/projects/<id>/edit')
+def edit_project(id):
+    project = Project.query.get_or_404(id)
+    return render_template('projectform.html', project=project)
+
+
 """
 Create the Delete route
 Create a delete route to delete the project from the database. When the delete button is clicked by the user, the project will be removed from the database and they will be redirected to the homepage.
 """
+
+
+@app.route('/projects/<id>/delete')
+def delete_project(id):
+    project = Project.query.get_or_404(id)
+    db.session.delete(project)
+    db.session.commit()
+    return redirect(url_for('index'))
+
+
+@app.errorhandler(404)
+def not_found(error):
+    return render_template('404.html', msg=error), 404
 
 
 if __name__ == '__main__':
