@@ -1,4 +1,5 @@
 from models import db, app, Project
+from utils.clean_date import clean_date
 from flask import (render_template, url_for, request, redirect)
 
 
@@ -68,7 +69,7 @@ The page should present a new blank project form that allows the user to Create 
 """
 
 
-@app.route('/project/new')
+@app.route('/project/new', methods=['GET', 'POST'])
 def add_project():
     return render_template('projectform.html')
 
@@ -90,7 +91,7 @@ NOTE: Updating a project should not result in a new project being created, this 
 """
 
 
-@app.route('/project/<id>/edit')
+@app.route('/project/<id>/edit', methods=['GET', 'POST'])
 def edit_project(id):
     project = Project.query.get_or_404(id)
     return render_template('projectform.html', project=project)
