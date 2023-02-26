@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>{{ Add Project}}</title>
+    <title>Add Project</title>
     <meta name="description" content="A portfolio of my work" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
@@ -40,6 +40,9 @@
       <label for="date">Completion Date</label>
       <input type="month" name="date" id="date" required />
       <label for="description">Description</label>
+      {% if date_error == True %}
+      <p class="error">* Please input a valid date from the past.</p>
+      {% endif %}
       <textarea
         name="desc"
         id="description"

@@ -1,6 +1,7 @@
 from models import db, app, Project
 from utils.clean_date import clean_date
 from flask import (render_template, url_for, request, redirect)
+import datetime
 
 
 """
@@ -9,10 +10,6 @@ Route: /
 
 This view should render a page of all of the projects, where each project displays the following fields:
 
-Title - should be a linked title, clicking it routes the user to the detail page for the clicked project.
-Short description - Each project should have a short description of what the project is about.
-Skills practiced - a list of the skills practiced in the project
-GitHub link - A link to the project on GitHub
 
 Create an interface for a portfolio web application. The main (index) page lists your projects including the project title and short description. Each project links to a detail page that displays the title, date, and description.
 """
@@ -22,12 +19,6 @@ Create an interface for a portfolio web application. The main (index) page lists
 def index():
     projects = Project.query.all()
     return render_template('index.html', projects=projects)
-
-
-"""
-Create an About page
-Create an about page route and fill out the HTML template.
-"""
 
 
 @app.route('/about')
@@ -53,13 +44,16 @@ NOTE: This page should contain a link/button that takes the user to the Edit rou
 @app.route('/project/<id>')
 def project(id):
     project = Project.query.get_or_404(id)
-    return render_template('detail.html', project=project)
+    formatted_date = (project.date).strftime("%B, %Y")
+    return render_template('detail.html', project=project, formatted_date=formatted_date)
 
 
 @app.route('/project/new', methods=['GET', 'POST'])
 def add_project():
     if request.form:
         formatted_date = clean_date(request.form['date'])
+        if type(formatted_date) != datetime.datetime:
+            return render_template('projectform.html', date_error=True)
         new_project = Project(
             title=request.form['title'], date=formatted_date, skills=request.form['skills'], repo_link=request.form['github'], description=request.form['desc'])
         db.session.add(new_project)
@@ -88,7 +82,7 @@ NOTE: Updating a project should not result in a new project being created, this 
 @app.route('/project/<id>/edit', methods=['GET', 'POST'])
 def edit_project(id):
     project = Project.query.get_or_404(id)
-    return render_template('projectform.html', project=project)
+    return render_template('editproject.html', project=project)
 
 
 """

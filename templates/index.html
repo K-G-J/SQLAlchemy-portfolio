@@ -56,14 +56,14 @@
       <h2>Projects</h2>
       <div id="project-list">
         {% for project in projects %}
-        <div id="project{{projects.index(project)}}" class="a-project">
-          <h3>{{ project.title }}</h3>
-          <a href="{{ project.repo_url }}" class="github-btn" target="_blank">
+        <div id="project{{projects.index(project) + 1}}" class="a-project">
+          <a href="{{ url_for('project', id=project.id) }}"><h3>{{ project.title }}</h3></a>
+          <a href="{{ project.repo_link }}" class="github-btn" target="_blank">
             <i class="fab fa-github"></i>
             View on GitHub
           </a>
           <p>
-            {{ project.description }}
+            {{ project.description.split('.')[0] }}
           </p>
           <p>
             Skills: {{ project.skills }}
