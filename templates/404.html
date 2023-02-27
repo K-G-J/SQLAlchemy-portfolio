@@ -23,7 +23,18 @@
     <link rel="stylesheet" href="/static/css/styles.css" />
   </head>
   <body>
-    <h1>OOPS 😕</h1>
-    <h2>{{ msg }}</h2>
+    <h1 class="page-header page-not-found-header">OOPS 😕</h1>
+    <br />
+    <img
+      class="page-not-found-img"
+      src="https://media.tenor.com/OyUVgQi-l-QAAAAC/404.gif"
+      alt="gif of spaceship with 404 message"
+    />
+    <br />
+    <p class="page-not-found-msg">{{ msg }}</p>
+    <br />
+    <a href="/" class="page-not-found-link"
+      ><button type="button" class="page-not-found-btn">Home</button></a
+    >
   </body>
 </html>

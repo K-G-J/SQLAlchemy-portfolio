@@ -39,6 +39,10 @@ body {
   overflow-x: hidden;
 }
 
+a {
+  color: var(--accent);
+}
+
 /*******
 Nav
 *******/
@@ -496,10 +500,6 @@ Form
   background-color: var(--secondary);
 }
 
-.error {
-  color: red;
-}
-
 /********************
 EXCEEDS - About Page
 ********************/
@@ -553,6 +553,50 @@ EXCEEDS - About Page
   color: var(--white);
   font-size: 20px;
   padding-right: 10px;
+}
+
+/*******
+Error Messages
+*******/
+
+.error {
+  color: red;
+}
+
+.page-not-found-header {
+  margin: 1em;
+  text-align: center;
+}
+
+.page-not-found-msg {
+  margin: 1em;
+  text-align: center;
+}
+
+.page-not-found-img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
+}
+
+.page-not-found-btn {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid var(--secondary);
+  border-radius: 10px;
+  font-size: 20px;
+  padding: 9px 40px;
+}
+
+.page-not-found-btn:hover {
+  background-color: var(--accent);
+  color: var(--white);
+}
+
+.page-not-found-link {
+  text-decoration: none;
 }
 
 /*******
