@@ -1,7 +1,7 @@
+import datetime
+from flask import (render_template, url_for, request, redirect)
 from models import db, app, Project
 from utils.clean_date import clean_date
-from flask import (render_template, url_for, request, redirect)
-import datetime
 
 
 @app.route('/')
@@ -67,10 +67,6 @@ def not_found(error):
 
 
 if __name__ == '__main__':
-    """
-    NOTE: When run, the database should already contain at least the 4 previous projects of the Techdegree.
-    """
-
     app.run(debug=True, port=8000, host='127.0.0.1')
 
     with app.app_context():
