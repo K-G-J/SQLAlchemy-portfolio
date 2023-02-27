@@ -26,6 +26,8 @@ Portfolio displaying my Python projects. The projects demonstrate basic programm
    python3 app.py
    ```
 
+5. Navigate to host [127.0.0.1 on port 8000](http://127.0.0.1:8000/)
+
 ## What I Learned
 
 For my portfolio I utilized:
